@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import requests
+ from bs4 import BeautifulSoup
 
 
 def get_html_content(request):
     city=request.GET.get('city')
     city=city.replace(" ","+")
-    USER_AGENT =USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"
+    USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"
     LANGUAGE = "en-US,en;q=0.5"
     session = requests.Session()
     session.headers['User-Agent']= USER_AGENT
@@ -21,7 +22,6 @@ def home(request):
     if 'city' in request.GET:
         #fetch the weather from google.
         html_content=get_html_content(request)
-        from bs4 import BeautifulSoup
         soup=BeautifulSoup(html_content,'html.parser')
         result=dict()
         # extract region
