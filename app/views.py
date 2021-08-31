@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import requests
- from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 
 
 def get_html_content(request):
